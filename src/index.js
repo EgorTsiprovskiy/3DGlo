@@ -1,5 +1,3 @@
-const one = require('./modules/one');
-const tow = require('./modules/two');
+const timer = require('./modules/timer');
 
-one();
-tow();
+timer('16 september 2023');
