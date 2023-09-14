@@ -35,4 +35,4 @@ const timer = (deadline) => {
   let idUpdate = setInterval(updateClock, 1000);
 };
 
-module.exports = timer;
+export default timer
