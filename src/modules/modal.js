@@ -23,14 +23,15 @@ const modal = () => {
       if(window.outerHeight > 768) {
         modalAnimate();
       }
-      
     });
   });
   
   modal.addEventListener('click', (e) => {
-    if (!e.target.closest('.popup-content') || e.target.classList.contains('.popup-close')) {
+    console.log(e.target);
+    if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
       modal.style.display = "none";
     }
+    count = -1000;
   })
 
 
