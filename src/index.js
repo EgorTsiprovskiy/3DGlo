@@ -4,6 +4,7 @@ import modal from './modules/modal';
 import valid from './modules/valid';
 import tabs from './modules/tabs';
 import slaider from './modules/slaider';
+import calc from './modules/calc';
 
 timer('22 september 2023');
 menu();
@@ -11,3 +12,4 @@ modal();
 valid();
 tabs();
 slaider();
+calc(100);
