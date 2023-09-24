@@ -1,3 +1,5 @@
+import { animate } from "./helpers";
+
 const modal = () => {
   const buttons = document.querySelectorAll(".popup-btn");
   const modal = document.querySelector(".popup");
@@ -6,22 +8,34 @@ const modal = () => {
   let idInterval;
   let count = -1000;
 
-  const modalAnimate = () => {
-    idInterval = requestAnimationFrame(modalAnimate);
+  // const modalAnimate = () => {
+  //   idInterval = requestAnimationFrame(modalAnimate);
 
-    if (count < -50) {
-      count = count + 40;
-      contentPopup.style.transform = `translateX(${count}px)`;
-    } else {
-      cancelAnimationFrame(idInterval);
-    }
-  };
+  //   if (count < -50) {
+  //     count = count + 40;
+  //     contentPopup.style.transform = `translateX(${count}px)`;
+  //   } else {
+  //     cancelAnimationFrame(idInterval);
+  //   }
+  // };
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      modal.style.display = "block";
+      
       if(window.outerHeight > 768) {
-        modalAnimate();
+          animate({
+            duration: 1200,
+            timing(timeFraction) {
+              return timeFraction;
+            },
+            draw(progress) {
+              if (count < -50) {
+                modal.style.display = "block";
+                contentPopup.style.left = (40 * progress) + '%';
+              }
+            }
+          });
+        
       }
     });
   });
