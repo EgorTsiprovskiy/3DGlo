@@ -1,15 +1,31 @@
-import menu from './modules/menu';
-import timer from './modules/timer';
-import modal from './modules/modal';
-import valid from './modules/valid';
-import tabs from './modules/tabs';
-import slaider from './modules/slaider';
-import calc from './modules/calc';
+import menu from "./modules/menu";
+import timer from "./modules/timer";
+import modal from "./modules/modal";
+import valid from "./modules/valid";
+import tabs from "./modules/tabs";
+import slaider from "./modules/slaider";
+import calc from "./modules/calc";
+import sendFrom from "./modules/sendForm";
 
-timer('22 september 2023');
+timer("22 september 2023");
 menu();
 modal();
 valid();
 tabs();
 slaider();
 calc(100);
+sendFrom({
+  formId: "form1",
+  someElem: [
+    {
+      type: "block",
+      id: "total",
+    },
+  ],
+});
+sendFrom({
+  formId: "form2",
+});
+sendFrom({
+  formId: "form3",
+});

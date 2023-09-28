@@ -13,7 +13,8 @@ const valid = () => {
 })
 validText.forEach((item) => {
     item.addEventListener('input', (e) => {
-      e.target.value = e.target.value.replace(/[^а-яА-Я\s-]/g, '');
+      e.target.value = e.target.value.replace(/[^а-яА-Я0-9\s-[:punct:]]/g, '');
+      //e.target.value = e.target.value.replace(/[^а-яА-ЯёЁ0-9\s\p{P}]/g, '');
      })
 })
 validEmail.forEach((item) => {
