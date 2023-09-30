@@ -1,49 +1,45 @@
 const sendFrom = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
-  const statusBlock = document.createElement('div');
-  const loadText = 'Загрузка...'
-  const errorText = 'Ошибка загрузки...'
-  const successText = 'Данные отправлены!'
+  const statusBlock = document.createElement("div");
+  const loadText = "Загрузка...";
+  const errorText = "Ошибка загрузки...";
+  const successText = "Данные отправлены!";
   const formUserName = form.querySelector('[name="user_name"]');
-  console.dir(formUserName);
-  let test = /^[а-яА-ЯЁё\s-]+$/g.test('ап ');
-  console.log(test);
 
   const validate = (list) => {
-    let success = true
+    let success = true;
 
-    list.forEach(input => {
-        if(input.name === "user_name"){
-            if(/^[а-яА-ЯЁё\s-]+$/g.test(input.value)){
-                success = true
-            } else {
-                alert('В строке "Ваше имя" разрешен ввод только кирилицы и пробелов!')
-            success = false
-            }
-        } else if (input.name === "user_phone"){
-            if(/^[0-9+\(\)-]+$/g.test(input.value)){
-                success = true
-            } else {
-                alert('В строке "Номер телефона" разрешен ввод только цифр, знака “+”, круглых скобок и дефис!')
-            success = false
-            }
-        } else if (input.name === "user_message"){
-        if(/^[а-яА-ЯёЁ0-9\s[:punct:]]+$/g.test(input.value)){
-            success = true
+    list.forEach((input) => {
+      if (input.name === "user_name") {
+        if (/^[а-яА-ЯЁё\s]+$/g.test(input.value)) {
+          success = true;
         } else {
-            alert('В строке "Ваше имя" разрешен ввод только кирилицы и пробелов и знаков препинаний!')
-        success = false
+          alert(
+            'В строке "Ваше имя" разрешен ввод только кирилицы и пробелов!'
+          );
+          success = false;
         }
+      } else if (input.name === "user_phone") {
+        if (/^\+?\d{11,}$/g.test(input.value)) {
+          success = true;
+        } else {
+          alert(
+            'Минимальная длинна номера 11 цифр! А так же, в строке "Номер телефона" разрешен ввод только цифр, знака “+”, круглых скобок и дефис!'
+          );
+          success = false;
         }
-    })
-
-    // list.forEach(input => {
-    //     if(!input.classList.contains('success')){
-    //         success = false
-    //     }
-    // })
-
-    return success
+      } else if (input.name === "user_message") {
+        if (/^[а-яА-ЯёЁ0-9\s\p{P}]+$/g.test(input.value)) {
+          success = true;
+        } else {
+          alert(
+            'В строке "Ваше сообщение" разрешен ввод только кирилицы,пробелы, цифры и знаков препинаний!'
+          );
+          success = false;
+        }
+      }
+    });
+    return success;
   };
 
   const sendData = (data) => {
@@ -58,14 +54,10 @@ const sendFrom = ({ formId, someElem = [] }) => {
 
   const submitForm = () => {
     const formElements = form.querySelectorAll("input");
-    const formUserMessage = form.querySelector('[name="user_message"]');
-    const formUserPhone = form.querySelector('[name="user_phone"]');
-    const formUserName = form.querySelector('[name="user_name"]');
-    
     const formData = new FormData(form);
     const formBody = {};
 
-    statusBlock.textContent = loadText
+    statusBlock.textContent = loadText;
     form.append(statusBlock);
 
     formData.forEach((val, key) => {
@@ -83,31 +75,31 @@ const sendFrom = ({ formId, someElem = [] }) => {
     });
 
     if (validate(formElements)) {
-        sendData(formBody)
+      sendData(formBody)
         .then((data) => {
-            statusBlock.textContent = successText
-            formElements.forEach(input => {
-                input.value = ''
-            })
-          })
-          .catch((error) => {
-            statusBlock.textContent = errorText
-          })
+          statusBlock.textContent = successText;
+          formElements.forEach((input) => {
+            input.value = "";
+          });
+        })
+        .catch((error) => {
+          statusBlock.textContent = errorText;
+        });
     } else {
-        alert('not valid')
+      alert("not valid");
     }
-  }
+  };
 
-  try{
-    if(!form) {
-        throw new Error('Верните форму')
+  try {
+    if (!form) {
+      throw new Error("Верните форму");
     }
     form.addEventListener("submit", (event) => {
-        event.preventDefault();
-    
-        submitForm();
-      });
-  } catch(error){
+      event.preventDefault();
+
+      submitForm();
+    });
+  } catch (error) {
     console.log(error.message);
   }
 };

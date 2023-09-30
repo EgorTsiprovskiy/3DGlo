@@ -1,6 +1,6 @@
 const slaider = () => {
   const slaiderBlock = document.querySelector(".portfolio-content");
-  const slaides = document.querySelectorAll(".portfolio-item");
+  let slaides = document.querySelectorAll(".portfolio-item");
   let dots = document.querySelectorAll(".dot");
   const portfolioDots = document.querySelector(".portfolio-dots");
 
@@ -29,6 +29,7 @@ const slaider = () => {
 
   const autoSlaid = () => {
     dots = document.querySelectorAll(".dot");
+    
     prevSlide(slaides, currentSlide, "portfolio-item-active");
     prevSlide(dots, currentSlide, "dot-active");
     currentSlide++;
@@ -51,6 +52,7 @@ const slaider = () => {
 
   slaiderBlock.addEventListener("click", (e) => {
     e.preventDefault();
+    dots = document.querySelectorAll(".dot");
 
     if (!e.target.matches(".dot, .portfolio-btn")) {
       return;
